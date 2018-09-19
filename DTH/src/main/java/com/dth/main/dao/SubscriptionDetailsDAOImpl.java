@@ -64,10 +64,15 @@ public class SubscriptionDetailsDAOImpl implements SubscriptionDetailsDAO {
 		 
 	*/	/*  String sql="Select s.subscriptionDetailsPK.subscriberID, s.subscriptionDetailsPK.channelId,cu.firstName,cu.lastName,ch.name, ch.costPerMonth From SubscriptionsDetails s, Customer cu, Channels ch Where s.subscriptionDetailsPK.subscriberID="+subscriberId;
 		*/
-		String sql="Select s.SUBSCRIPTION_ID, s.Channel_id,ch.CHANNEL_NAME, ch.COST_PER_MONTH, cu.SUBSCRIBER_ID, cu.FIRST_NAME, cu.LAST_NAME from subscription_details s INNER JOIN Channels ch ON s.channel_id=ch.channel_id INNER JOIN Customer cu ON s.SUBSCRIPTION_ID=cu.SUBSCRIBER_ID";
+		String sql="\r\n" + 
+				" Select s.SUBSCRIPTION_ID, s.Channel_id,ch.CHANNEL_NAME, ch.COST_PER_MONTH, cu.FIRST_NAME, cu.LAST_NAME " + 
+				" from subscription_details s " + 
+				" INNER JOIN Channels ch ON s.channel_id=ch.channel_id " + 
+				" INNER JOIN Customer cu ON s.SUBSCRIPTION_ID=cu.SUBSCRIBER_ID AND s.SUBSCRIPTION_ID= :id";
+		
 		Session session=sessionFactory.openSession();
 		
-		List<SubscriptionsDetails> list=(List<SubscriptionsDetails>)session.createSQLQuery(sql).setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP).getResultList();
+		List<SubscriptionsDetails> list=(List<SubscriptionsDetails>)session.createSQLQuery(sql).setParameter("id", subscriberId).setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP).getResultList();
 		Iterator it = list.listIterator();
 		while(it.hasNext()) {
 			HashMap obj= (HashMap) it.next();

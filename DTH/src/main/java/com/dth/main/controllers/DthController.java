@@ -1,13 +1,19 @@
 package com.dth.main.controllers;
 
+import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,6 +59,17 @@ public class DthController extends AbstractController{
 		model.addObject("lists", listOfChannels);
 		return model;
 	}
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ModelAndView handleEmployeeNotFoundException(HttpServletRequest request, DataIntegrityViolationException ex){
+		logger.error("Requested URL="+request.getRequestURL());
+		logger.error("Exception Raised="+ex);
+		
+		ModelAndView modelAndView = new ModelAndView();
+	    modelAndView.addObject("url", request.getRequestURL());
+	    modelAndView.addObject("message",ex.getMostSpecificCause().getMessage());
+	    modelAndView.setViewName("error");
+	    return modelAndView;
+	}	
 	
 	@RequestMapping("/getChannels1")
 	public ModelAndView getChannels1() {

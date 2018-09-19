@@ -17,7 +17,7 @@ $(function() {
 });
 </script>
  
-<title>Edit Subscription Details</title>
+<title>Subscribe a Channel</title>
 </head>
 <body>
 <h1>DTH Subcription</h1><br>
