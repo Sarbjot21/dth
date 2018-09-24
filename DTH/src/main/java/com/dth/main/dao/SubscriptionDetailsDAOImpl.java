@@ -17,9 +17,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
 import com.dth.main.model.SubscriptionsDetails;
-import com.mysql.cj.jdbc.SuspendableXAConnection;
 import com.dth.main.model.Channels;
 import com.dth.main.model.Customer;
 import com.dth.main.model.SubscriptionDetailsPK;
