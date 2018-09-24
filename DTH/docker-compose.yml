@@ -1,19 +1,19 @@
-version : '3'
+version : '2'
 
-services: 
-    dthmysql:
-        image:  mysql:8.0.2
-        enironment:
-            MYSQL_ROOT_PASSWORD: Singh.12345
+services:
+    dthsql:
+        image:  mysql:latest
+        environment:
+            MYSQL_ROOT_PASSWORD: August2September
             MYSQL_DATABASE: dth
         ports:
-           -"3308:3306"
-        
+           - "3306:3306"
+
     dthimage:
-        image:    sarbjot012/dthservice:latest
+        image: sarbjot012/dthservice:latest
         ports:
-          -8080:8080
+          - "8080:8080"
         depends_on:
-          -dthmysql
-        
-                
+                - "dthsql"
+        environment:
+                - SPRING_DATASOURCE_URL=jdbc:mysql://dthsql:3306/dth?useSSL=false&allowPublicKeyRetrieval=true
