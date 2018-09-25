@@ -41,7 +41,7 @@ public class ComponentConfiguration {
 				e.printStackTrace();
 			}
 	        Properties properties=new Properties();
-	        properties.setProperty("hibernate.hbm2ddl.auto",environment.getProperty("spring.jpa.hibernate.ddl-auto"));
+	        //properties.setProperty("hibernate.hbm2ddl.auto",environment.getProperty("spring.jpa.hibernate.ddl-auto"));
 	        properties.setProperty("hibernate.dialect",environment.getProperty("spring.jpa.properties.hibernate.dialect"));
 	        properties.setProperty("hibernate.show_sql","true");
 	    /*    properties.setProperty("hibernate.connection.url", environment.getProperty(""));
