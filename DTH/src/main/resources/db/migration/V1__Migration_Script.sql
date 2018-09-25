@@ -11,8 +11,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------------------------------------------------------
 -- Schema dth
 -- ----------------------------------------------------------------------------
-DROP SCHEMA IF EXISTS `dth` ;
-CREATE SCHEMA IF NOT EXISTS `dth` ;
+DROP DATABASE IF EXISTS `dth` ;
+CREATE DATABASE IF NOT EXISTS `dth` ;
 
 -- ----------------------------------------------------------------------------
 -- Table dth.channels
