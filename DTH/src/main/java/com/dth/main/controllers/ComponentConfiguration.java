@@ -26,10 +26,10 @@ public class ComponentConfiguration {
 	private final String USER = "spring.datasource.username";
 	private final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private final String PASSWORD = "spring.datasource.password";
-
+	
 	@Bean 
 	public LocalSessionFactoryBean sessionFactory() {
-		LocalSessionFactoryBean sessionFactory=new LocalSessionFactoryBean();
+			LocalSessionFactoryBean sessionFactory=new LocalSessionFactoryBean();
 			System.out.println("SessionFactor +"+sessionFactory);
 			System.out.println("DriverManagerDataSource"+dataSource());
 			try {
@@ -56,9 +56,13 @@ public class ComponentConfiguration {
 	BasicDataSource dataSource() {
 		BasicDataSource driverManagerDataSource = new BasicDataSource();
 		driverManagerDataSource.setUrl(environment.getProperty(URL));
+		System.out.println(environment.getProperty(URL));
 		driverManagerDataSource.setUsername(environment.getProperty(USER));
+		System.out.println(environment.getProperty(USER));
 		driverManagerDataSource.setPassword(environment.getProperty(PASSWORD));
+		System.out.println(environment.getProperty(PASSWORD).length());
 		driverManagerDataSource.setDriverClassName(DRIVER);
+		System.out.println(DRIVER);
 		return driverManagerDataSource;
 	}
 

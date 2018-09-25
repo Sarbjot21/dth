@@ -31,6 +31,7 @@ public class SubscriptionDetailsDAOImpl implements SubscriptionDetailsDAO {
 	@Override
 	public void saveSubscription(long subscriber_id, String channel_name,Date date) {
 		// TODO Auto-generated method stub
+		
 		List<Channels> channel;
 		System.out.println("Subscription Details Saved as :\n");
 		String sql="FROM Channels where name=:name";
