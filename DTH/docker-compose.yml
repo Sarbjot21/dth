@@ -10,12 +10,13 @@ services:
            - "3308:3306"
 
     dthimage:
-        image: sarbjot012/dthservice:latest
-        ports:
-            - "8080:8080"
-        depends_on:
-                - "dthsql"
-        environment:
-                - SPRING_DATASOURCE_URL=jdbc:mysql://dthsql:3306/dth?useSSL=false&allowPublicKeyRetrieval=true&connectTimeout=0&socketTimeout=0&autoReconnect=true
-        links:
-                - dthsql:dthsql
+         image: tomcat:latest
+         ports:
+          - 8080:8080
+         volumes:
+            - ./target/dthService-0.0.1-SNAPSHOT.war:/usr/local/tomcat/webapps/dth.war
+         depends_on:
+            - dthsql
+         environments:
+            -  SPRING_DATASOURCE_URL=jdbc:mysql://dthsql:3306/dth?useSSL=false&allowPublicKeyRetrieval=true&connectTimeout=0&socketTimeout=0&autoReconnect=true
+            
