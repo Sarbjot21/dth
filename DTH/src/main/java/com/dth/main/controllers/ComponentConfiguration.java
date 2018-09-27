@@ -16,6 +16,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 @Configuration
+@PropertySource(value = { "classpath:application.properties" })
 @PropertySource(value = { "classpath:application-${spring.profiles.active}.properties" })
 public class ComponentConfiguration {
 	
