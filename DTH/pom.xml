@@ -153,16 +153,19 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+			        <addResources>true</addResources>
+			    </configuration>
 			</plugin>
 			<plugin>
 			    <groupId>com.spotify</groupId>
 			    <artifactId>docker-maven-plugin</artifactId>
 			    <configuration>
 			        <imageName>dth/${project.artifactId}</imageName>
-			        <dockerDirectory>src/main/docker</dockerDirectory>
+			        <dockerDirectory>src/main</dockerDirectory>
 			        <resources>
 			            <resource>
-			                <targetPath>src/main/docker/</targetPath>
+			                <targetPath>src/main</targetPath>
 			                <directory>${project.build.directory}</directory>
 			                <include>${project.build.finalName}.jar</include>
 			            </resource>
