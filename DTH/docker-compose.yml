@@ -7,16 +7,19 @@ services:
             MYSQL_ROOT_PASSWORD: August2September
             MYSQL_DATABASE: dth
         ports:
-           - "3308:3306"
+           - 3306:3306
 
     dthimage:
-         image: tomcat:latest
+         image: sarbjot012/dthservice:latest
          ports:
           - 8080:8080
-         volumes:
-            - ./target:/usr/local/tomcat/webapps
+         #volumes:
+            #    - ./target/dthService-0.0.1-SNAPSHOT.war:/usr/local/tomcat/webapps/dth.war
+            #    - ./target:/usr/local/tomcat/webapps
          depends_on:
             - dthsql
          environment:
             -  SPRING_DATASOURCE_URL=jdbc:mysql://dthsql:3306/dth?useSSL=false&allowPublicKeyRetrieval=true&connectTimeout=0&socketTimeout=0&autoReconnect=true
             -  SPRING_PROFILES_ACTIVE=test
+         links:
+            -  dthsql:dthsql
