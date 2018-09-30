@@ -11,9 +11,11 @@ import javax.persistence.Table;
 @Table(name="customer")
 public class Customer {
 		@Id
-		@Column (name="Subscriber_ID")
+		@Column (name="SUBSCRIBER_ID")
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
 		private long subscriberID;
+		
+		@Column( name= "REGISTERED_MOBILE")
 		private long mobile;
 		@Column(name="FIRST_NAME")
 		private String firstName;

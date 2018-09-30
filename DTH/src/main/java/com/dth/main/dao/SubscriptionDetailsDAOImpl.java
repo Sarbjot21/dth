@@ -66,8 +66,8 @@ public class SubscriptionDetailsDAOImpl implements SubscriptionDetailsDAO {
 		String sql="\r\n" + 
 				" Select s.SUBSCRIPTION_ID, s.Channel_id,ch.CHANNEL_NAME, ch.COST_PER_MONTH, cu.FIRST_NAME, cu.LAST_NAME " + 
 				" from subscription_details s " + 
-				" INNER JOIN Channels ch ON s.channel_id=ch.channel_id " + 
-				" INNER JOIN Customer cu ON s.SUBSCRIPTION_ID=cu.SUBSCRIBER_ID AND s.SUBSCRIPTION_ID= :id";
+				" INNER JOIN dth.channels ch ON s.channel_id=ch.channel_id " + 
+				" INNER JOIN dth.customer cu ON s.SUBSCRIPTION_ID=cu.SUBSCRIBER_ID AND s.SUBSCRIPTION_ID= :id";
 		
 		Session session=sessionFactory.openSession();
 		
