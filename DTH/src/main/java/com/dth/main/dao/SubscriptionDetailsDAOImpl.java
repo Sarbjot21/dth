@@ -2,7 +2,7 @@ package com.dth.main.dao;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -29,7 +29,7 @@ public class SubscriptionDetailsDAOImpl implements SubscriptionDetailsDAO {
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public void saveSubscription(long subscriber_id, String channel_name,Date date) {
+	public String saveSubscription(Long subscriber_id, String channel_name,Date date) {
 		// TODO Auto-generated method stub
 		
 		List<Channels> channel;
@@ -51,6 +51,7 @@ public class SubscriptionDetailsDAOImpl implements SubscriptionDetailsDAO {
 		Transaction tx=session.beginTransaction();
 		session.saveOrUpdate(subscriptionsDetails);
 		tx.commit();
+		return "Success";
 		
 	}
 
@@ -72,17 +73,14 @@ public class SubscriptionDetailsDAOImpl implements SubscriptionDetailsDAO {
 		Session session=sessionFactory.openSession();
 		
 		List<SubscriptionsDetails> list=(List<SubscriptionsDetails>)session.createSQLQuery(sql).setParameter("id", subscriberId).setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP).getResultList();
-		Iterator it = list.listIterator();
-		while(it.hasNext()) {
-			HashMap obj= (HashMap) it.next();
-			System.out.println(obj.values());
-		}
+		
+		
 		return list;
 		
 	}
 
 	@Override
-	public void removeSubscription(String channel_name,Long subscriber_id) {
+	public String removeSubscription(String channel_name,Long subscriber_id) {
 		// TODO Auto-generated method stub
 		
 		Session session = sessionFactory.openSession();
@@ -95,6 +93,7 @@ public class SubscriptionDetailsDAOImpl implements SubscriptionDetailsDAO {
 		Transaction tx=session.beginTransaction();
 		query.executeUpdate();
 		tx.commit();
+		return "Success";
 	}
 
 	@Override

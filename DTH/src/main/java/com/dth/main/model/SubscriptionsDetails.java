@@ -1,6 +1,7 @@
 package com.dth.main.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -37,8 +38,8 @@ public class SubscriptionsDetails {
 	public Date getSubscriptionDate() {
 		return subscriptionDate;
 	}
-	public void setSubscriptionDate(Date subscriptionDate) {
-		this.subscriptionDate = subscriptionDate;
+	public void setSubscriptionDate( Date date) {
+		this.subscriptionDate = date;
 	}
 	
 	

@@ -66,6 +66,13 @@
             <artifactId>flyway-core</artifactId>
            	<scope>compile</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <scope>test</scope>
+		</dependency>
+        
        <!--  <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -121,7 +128,12 @@
 		    <artifactId>tomcat-embed-jasper</artifactId>
 		    <scope>compile</scope>
 		</dependency>
-		
+		<dependency>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2</artifactId>
+		    <scope>test</scope>
+		   
+		</dependency>
 		
 		
 		<!-- <dependency>
