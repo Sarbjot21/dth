@@ -23,7 +23,7 @@ import com.dth.main.dao.SubscriptionDetailsDAO;
 import com.dth.main.dao.SubscriptionDetailsDAOImpl;
 
 @RunWith(SpringRunner.class)
-@TestPropertySource(locations = {"classpath:application-dev.properties"})
+@TestPropertySource(locations = {"classpath:application-test.properties"})
 @SpringBootTest
 public class DTHApplcationTest {
 	
