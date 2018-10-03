@@ -1,14 +1,9 @@
 package com.dth.main.controllers;
 
-import java.sql.SQLException;
 import java.util.Properties;
-
-
-
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -23,10 +18,10 @@ public class ComponentConfiguration {
 	@Autowired
 	Environment environment;
 	
-	private final String URL = "spring.datasource.url";
-	private final String USER = "spring.datasource.username";
-	private final String DRIVER = "com.mysql.cj.jdbc.Driver";
-	private final String PASSWORD = "spring.datasource.password";
+	private static final String URL = "spring.datasource.url";
+	private static final String USER = "spring.datasource.username";
+	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+	private static final String PASS = "spring.datasource.password";
 	
 	@Bean 
 	public LocalSessionFactoryBean sessionFactory() {
@@ -35,9 +30,7 @@ public class ComponentConfiguration {
 			System.out.println("DriverManagerDataSource"+dataSource());
 			try {
 			sessionFactory.setDataSource(dataSource());
-		    sessionFactory.setPackagesToScan(new String[] { 
-		                  "com.dth.main.model" 
-		        });
+		    sessionFactory.setPackagesToScan("com.dth.main.model");
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -60,8 +53,8 @@ public class ComponentConfiguration {
 		System.out.println(environment.getProperty(URL));
 		driverManagerDataSource.setUsername(environment.getProperty(USER));
 		System.out.println(environment.getProperty(USER));
-		driverManagerDataSource.setPassword(environment.getProperty(PASSWORD));
-		System.out.println(environment.getProperty(PASSWORD).length());
+		driverManagerDataSource.setPassword(environment.getProperty(PASS));
+		System.out.println(environment.getProperty(PASS).length());
 		driverManagerDataSource.setDriverClassName(DRIVER);
 		System.out.println(DRIVER);
 		return driverManagerDataSource;

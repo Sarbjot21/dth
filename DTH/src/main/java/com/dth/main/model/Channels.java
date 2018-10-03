@@ -15,7 +15,7 @@ public class Channels {
 	@Id
 	@Column(name="CHANNEL_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer ChannelID;
+	private Integer channelId;
 	
 	@Column(name="CHANNEL_NAME")
 	private String name;
@@ -25,10 +25,10 @@ public class Channels {
 	
 	
 	public Integer getId() {
-		return ChannelID;
+		return channelId;
 	}
 	public void setId(Integer id) {
-		this.ChannelID = id;
+		this.channelId = id;
 	}
 	public String getName() {
 		return name;
@@ -45,7 +45,7 @@ public class Channels {
 	
 	@Override
 	public String toString(){
-		return "id="+this.ChannelID+", name="+this.name+", Cost Per Month="+this.costPerMonth;
+		return "id="+this.channelId+", name="+this.name+", Cost Per Month="+this.costPerMonth;
 	}
 
 	
