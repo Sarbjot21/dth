@@ -19,7 +19,7 @@
 	<br><br>
 	
 	<div>
-		<input name="Clear" value="Clear" type="button"/>
+		<input type="reset" value="Clear">
 		<input name="Submit" value="View Details" type="Submit"/>	
 	
 	</div>
