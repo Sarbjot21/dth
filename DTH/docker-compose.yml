@@ -19,7 +19,7 @@ services:
          depends_on:
             - dthsql
          environment:
-            -  SPRING_DATASOURCE_URL=jdbc:mysql://dthsql:3306/dth?useSSL=false&allowPublicKeyRetrieval=true&connectTimeout=0&socketTimeout=0&autoReconnect=true
+            -  SPRING_DATASOURCE_URL=jdbc:mysql://dthsql:3306/dth?useSSL=false&allowPublicKeyRetrieval=true&connectTimeout=0&socketTimeout=0&autoReconnect=true&create=true
             -  SPRING_PROFILES_ACTIVE=test
          links:
             -  dthsql:dthsql
