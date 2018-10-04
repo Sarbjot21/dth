@@ -13,7 +13,7 @@ public interface SubscriptionDetailsDAO {
 
 	public String saveSubscription(Long subscriber_id, String channel_name,Date date);
 	public List<SubscriptionsDetails> getDetails(Long subscriberId);
-	public String removeSubscription(String channel_name, Long subscriber_id);
+	public Integer removeSubscription(String channel_name, Long subscriber_id);
 	public List<Customer> getCustomerDetails(Long customerId);
 	public List<Channels> getChannelList();
 	public Double getCost(List<SubscriptionsDetails> listOfSubscriptions);

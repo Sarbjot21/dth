@@ -23,7 +23,6 @@ import com.dth.main.model.Customer;
 import com.dth.main.model.SubscriptionDetailsPK;
 
 @Repository
-
 public class SubscriptionDetailsDAOImpl implements SubscriptionDetailsDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -80,7 +79,7 @@ public class SubscriptionDetailsDAOImpl implements SubscriptionDetailsDAO {
 	}
 
 	@Override
-	public String removeSubscription(String channel_name,Long subscriber_id) {
+	public Integer removeSubscription(String channel_name,Long subscriber_id) {
 		// TODO Auto-generated method stub
 		
 		Session session = sessionFactory.openSession();
@@ -91,9 +90,9 @@ public class SubscriptionDetailsDAOImpl implements SubscriptionDetailsDAO {
 				.setParameter("channel",channel.get(0).getId())
 				.setParameter("subscriber", subscriber_id);
 		Transaction tx=session.beginTransaction();
-		query.executeUpdate();
+		int rows=query.executeUpdate();
 		tx.commit();
-		return "Success";
+		return rows;
 	}
 
 	@Override
