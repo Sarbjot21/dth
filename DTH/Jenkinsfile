@@ -1,57 +1,74 @@
-node {
-   stage('Preparation') { // for display purposes
-      // Get some code from a GitHub repository
-      //git 'https://github.com/Sarbjot21/dth.git'
-  	  checkout scm    
-   }
-   stage('Build') {
-      // Run the maven build
-        dir('DTH'){
-            if (isUnix()) {
-                "mvn -DskipTests clean install"
-            } else {
-                bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
-            }
-        }
-   }   
-   stage('Docker Push'){
-        dir('DTH'){
-            sh  '''if [ "$(docker ps -a |grep dthservice | wc -l)" -ne 0 ]; then docker rm -f $(docker ps -a |grep dthservice | awk '{print $1}') ; fi'''
-            sh  '''if [ "$(docker images | grep dth | wc -l)" -ne 0 ]; then docker rmi -f $(docker images |grep dth | awk '{print $3}') ; fi'''
-            sh  "docker build -t dthimage:latest ."
-            sh    "docker images"
-            sh    "docker login"
-            sh    "docker tag dthimage:latest sarbjot012/dthservice:latest"
-            sh    "docker push sarbjot012/dthservice:latest"
-            sh    "docker images"
-        }
-       
-   }   
-   stage('Test'){
-        dir('DTH'){
-            sh "mvn test"
-        }
-   }
-   stage('Results') {
-      junit 'DTH/target/surefire-reports/TEST-*.xml'
-      archiveArtifacts  'DTH/target/*.war'
-   }
-   stage('Code Analysis'){
-      try{
-         dir('DTH'){
-            sh "mvn sonar:sonar \
-               -Dsonar.host.url=http://dth.eastus.cloudapp.azure.com:9000/sonar \
-               -Dsonar.login=451986b24f470066a778f431129dd828d1049a4d"
-         }
-      }catch(err){
-         currentBuild.result='FAILED'
-         
-      }
-   }
-   
-   stage('Deploy'){       
-       dir('DTH'){
-           sh "docker-compose up -d"
-       }
-   }
-}
+	node{
+		stage('Preparation') { // for display purposes
+			// Get some code from a GitHub repository
+			//git 'https://github.com/Sarbjot21/dth.git'
+			checkout scm    
+		}
+		stage('Build') {
+		  // Run the maven build
+			dir('DTH'){
+					sh "mvn -DskipTests clean install"
+					stash name: 'dthCode',
+						  excludes: 'target/surefire-reports/**',
+						  includes: '**'
+			}
+		}   
+		stage('Docker Push'){
+			dir('DTH'){
+				sh  '''if [ "$(docker ps -a |grep dthservice | wc -l)" -ne 0 ]; then docker rm -f $(docker ps -a |grep dthservice | awk '{print $1}') ; fi'''
+				sh  '''if [ "$(docker images | grep dth | wc -l)" -ne 0 ]; then docker rmi -f $(docker images |grep dth | awk '{print $3}') ; fi'''
+				sh  "docker build -t dthimage:latest ."
+				sh    "docker images"
+				sh    "docker login"
+				sh    "docker tag dthimage:latest sarbjot012/dthservice:latest"
+				sh    "docker push sarbjot012/dthservice:latest"
+				sh    "docker images"
+			}
+		   
+		}   
+		stage('Test'){
+			dir('DTH'){
+				sh "mvn test"
+			}
+		}
+		stage('Results') {
+			junit 'DTH/target/surefire-reports/TEST-*.xml'
+			archiveArtifacts  'DTH/target/*.war'
+		}
+		
+		stage('Code Analysis'){
+			try{
+			dir('DTH'){
+				sh "mvn sonar:sonar \
+				-Dsonar.host.url=http://dth.eastus.cloudapp.azure.com:9000/sonar \
+				-Dsonar.login=451986b24f470066a778f431129dd828d1049a4d"
+			}
+			}catch(err){
+				currentBuild.result='FAILED'
+	
+			}
+		}
+	}
+	stage 'Deployment in Stage and Test Environment'
+	paralle envstage:
+		{
+			node{       
+				   sh 'rm -rf *'
+				   unstash 'dthCode'
+				   dir('DTH'){
+				   		echo "Deploying in Staging"
+					    sh "docker-compose up -d"
+				   }
+			}
+		}, envTest:
+		{
+			node{
+					sh 'rm -rf *'
+					unstash 'dthCode'
+					dir('DTH'){
+						echo"Deploying in Test"
+					}
+			}
+		}
+		
+		
