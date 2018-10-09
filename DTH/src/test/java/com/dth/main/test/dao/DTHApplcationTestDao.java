@@ -1,4 +1,4 @@
-package com.dth.main.test;
+package com.dth.main.test.dao;
 
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -29,7 +29,7 @@ import com.dth.main.dao.SubscriptionDetailsDAOImpl;
 @RunWith(SpringRunner.class)
 @TestPropertySource(value = { "classpath:application-test.properties" })
 @SpringBootTest
-public class DTHApplcationTest {
+public class DTHApplcationTestDao {
 	
 	@Autowired
 	SubscriptionDetailsDAO subscriptionDetailsDao = new SubscriptionDetailsDAOImpl();
