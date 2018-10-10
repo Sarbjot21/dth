@@ -29,7 +29,7 @@ import com.dth.main.dao.SubscriptionDetailsDAOImpl;
 @RunWith(SpringRunner.class)
 @TestPropertySource(value = { "classpath:application-test.properties" })
 @SpringBootTest
-public class DTHApplcationTestDao {
+public class DTHApplcationDaoTest {
 	
 	@Autowired
 	SubscriptionDetailsDAO subscriptionDetailsDao = new SubscriptionDetailsDAOImpl();
