@@ -1,8 +1,8 @@
 	node{
 		stage('Preparation') { // for display purposes
 			// Get some code from a GitHub repository
-			//git 'https://github.com/Sarbjot21/dth.git'
-			checkout scm    
+			git 'https://github.com/Sarbjot21/dth.git'
+			  
 		}
 		stage('Build') {
 		  // Run the maven build
