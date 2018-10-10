@@ -23,9 +23,7 @@ CREATE TABLE IF NOT EXISTS `dth`.`channels` (
   `CHANNEL_NAME` VARCHAR(20) NULL DEFAULT NULL,
   `Cost_per_month` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`CHANNEL_ID`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------------------------------------------------------
 -- Table dth.customer
@@ -36,9 +34,7 @@ CREATE TABLE IF NOT EXISTS `dth`.`customer` (
   `FIRST_NAME` VARCHAR(30) NULL DEFAULT NULL,
   `LAST_NAME` VARCHAR(30) NULL DEFAULT NULL,
    PRIMARY KEY (`SUBSCRIBER_ID`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------------------------------------------------------
 -- Table dth.subscription_details
@@ -57,8 +53,5 @@ CREATE TABLE IF NOT EXISTS `dth`.`subscription_details` (
   CONSTRAINT `subscription_details_ibfk_2`
     FOREIGN KEY (`SUBSCRIPTION_ID`)
     REFERENCES `dth`.`customer` (`SUBSCRIBER_ID`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 23
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
