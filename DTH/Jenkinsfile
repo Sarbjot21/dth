@@ -1,10 +1,11 @@
 	node{
-		
+		def DOCKER_USERNAME
+		def DOCKER_PASS
 		stage('Preparation') { // for display purposes
 			// Get some code from a GitHub repository
 			git 'https://github.com/Sarbjot21/dth.git'
-			def DOCKER_USERNAME='sarbjot012'
-			def DOCKER_PASS="Singh.12345"
+			DOCKER_USERNAME = 'sarbjot012'
+			DOCKER_PASS = "Singh.12345"
 		
 		}
 		stage('Build') {
