@@ -41,8 +41,8 @@
 		stage('Code Analysis'){
 			try{
 			dir('DTH'){
-				sh "mvn sonar:sonar \
-				-Dsonar.host.url=http://dth.eastus.cloudapp.azure.com:9000/sonar \
+				sh "mvn sonarqube:sonarqube \
+				-Dsonar.host.url=http://ec2-54-213-116-153.us-west-2.compute.amazonaws.com:9000/sonar \
 				-Dsonar.login=451986b24f470066a778f431129dd828d1049a4d"
 			}
 			}catch(err){
