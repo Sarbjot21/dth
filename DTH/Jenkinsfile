@@ -33,13 +33,11 @@
 		stage('Test'){
 			dir('DTH'){
 				sh "mvn test"
+				junit 'target/surefire-reports/TEST-*.xml'
+				archiveArtifacts  'target/*.war'
 			}
 		}
-		stage('Results') {
-			junit 'DTH/target/surefire-reports/TEST-*.xml'
-			archiveArtifacts  'DTH/target/*.war'
-		}
-		
+			
 		stage('Code Analysis'){
 			try{
 			dir('DTH'){
