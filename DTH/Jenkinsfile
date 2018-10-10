@@ -11,7 +11,7 @@
 		stage('Build') {
 		  // Run the maven build
 			dir('DTH'){
-					sh "mvn -DskipTests clean install"
+					sh "mvn clean install -DskipTests"
 					stash name: 'dthCode',
 						  excludes: 'target/surefire-reports/**',
 						  includes: '**'
@@ -52,7 +52,7 @@
 		}
 	}
 	stage 'Deployment in Stage and Test Environment'
-	paralle envstage:
+	parallel envstage:
 		{
 			node{       
 				   sh 'rm -rf *'
