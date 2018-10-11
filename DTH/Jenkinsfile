@@ -41,9 +41,9 @@
 		stage('Code Analysis'){
 			try{
 			dir('DTH'){
-				sh "mvn sonarqube:sonarqube \
-				-Dsonar.host.url=http://dth.eastus.cloudapp.azure.com:9000/sonar \
-				-Dsonar.login=451986b24f470066a778f431129dd828d1049a4d"
+				sh "mvn sonar:sonar \
+				  -Dsonar.host.url=http://dth.eastus.cloudapp.azure.com:9000/sonar \
+				  -Dsonar.login=2f4b2d4670146b405d2357c3dcbd9d879168cfea"
 			}
 			}catch(err){
 				currentBuild.result='FAILED'
@@ -59,7 +59,7 @@
 				   unstash 'dthCode'
 				   dir('DTH'){
 				   		echo "Deploying in Staging"
-					    sh "docker-compose up -d"
+					    sh "docker-compose up"
 				   }
 			}
 		}, envTest:
