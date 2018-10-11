@@ -38,7 +38,7 @@
 			}
 		}
 			
-		stage('Code Analysis'){
+		/*stage('Code Analysis'){
 			try{
 			dir('DTH'){
 				sh "mvn sonarqube:sonarqube \
@@ -49,7 +49,7 @@
 				currentBuild.result='FAILED'
 	
 			}
-		}
+		}*/
 	}
 	stage 'Deployment in Stage and Test Environment'
 	parallel envstage:
