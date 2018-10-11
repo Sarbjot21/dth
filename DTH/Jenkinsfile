@@ -59,7 +59,7 @@
 				   unstash 'dthCode'
 				   dir('DTH'){
 				   		echo "Deploying in Staging"
-					    sh "docker-compose up"
+					    sh "docker-compose up -d"
 				   }
 			}
 		}, envTest:
