@@ -5,7 +5,7 @@
 	
 	<groupId>com.dth</groupId>
 	<artifactId>dthService</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>war</packaging>
 
 	<name>DTH</name>
@@ -217,7 +217,18 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
+	<distributionManagement>
+<repository>
+<id>nexus</id>
+<name>maven-releases</name>
+<url>http://dth.eastus.cloudapp.azure.com:8081/repository/maven-releases/</url>
+</repository>
+<snapshotRepository>
+<id>nexus</id>
+<name>maven-snapshots</name>
+<url>http://dth.eastus.cloudapp.azure.com:8081/repository/maven-snapshots/</url>
+</snapshotRepository>
+</distributionManagement>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>spring-snapshots</id>
